@@ -9,7 +9,7 @@ class Dev < ActiveRecord::Base
         # returns true if the dev has, else false
 
         this_item = Freebie.find_by(item_name: item_name)
-        #this gets me the freebie item - now check to see if the dev id is this dev
+        #this gets me the freebie item - now check to see if the dev id is this item
         if this_item.dev_id == self.id
             puts "Heck yes!"
             true
@@ -22,9 +22,9 @@ class Dev < ActiveRecord::Base
     def give_away(dev_id, freebie_item_name)
         if self.recieved_one?(freebie_item_name) 
             Freebie.find_by(item_name: freebie_item_name).update(dev_id: dev_id)
-            pp "other updated"
+            puts "Thanks!  I think #{Dev.find(dev_id).name} will love the #{freebie_item_name}!"
         else 
-            puts "nope"
+            puts "Sorry - can't give away what we don't own!"
         end
     end
 end
